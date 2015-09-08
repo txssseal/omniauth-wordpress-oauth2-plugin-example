@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 1.2'
 #authentication bits
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-wordpress_hosted', github: 'jwickard/omniauth-wordpress-oauth2-plugin'
+gem 'omniauth-wordpress_hosted', github: 'txssseal/omniauth-wordpress-oauth2-plugin'
 gem 'oauth2'
 #gem 'omniauth-auth0', '~> 1.1'
 
