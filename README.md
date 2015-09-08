@@ -6,7 +6,7 @@ Example rails app demoing configuration.
 ## Steps
 Remember to setup wordpress site, install the plugin oauth-server on wordpress by justin greer.  Set Permalinks to Post Name. 
 
-Go to Setting -> Oauth Server -> clients
+Go to Settings -> Oauth Server -> clients
 
 add a new client with the redirect like 
 
