@@ -4,11 +4,21 @@ omniauth-wordpress-oauth2-plugin-example
 Example rails app demoing configuration.
 
 ## Steps
-(see commit history)
+Remember to setup wordpress site, install the plugin oauth-server on wordpress by justin greer.  Set Permalinks to Post Name. 
+
+Go to Setting -> Oauth Server -> clients
+
+add a new client with the redirect like 
+
+```
+http://your-rails-site.com/users/auth/wordpress_hosted/callback
+```
 
 ####1. Create new rails app.
   
 ```rails new omniauth-wordpress-oauth2-plugin-example . --database=postgres -T``` 
+
+Grab the Key and Secret for devise config
 
 ####2. Add devise / omniauth gems to configuration file. `Gemfile`
 
@@ -35,13 +45,6 @@ run migrations
 
 `rails db:migrate`
 
-Create client entry for your rails app with the callback key set to:
-
-```
-http://your-rails-site.com/users/auth/wordpress_hosted/callback
-```
-
-Save the generated key & secret for next step
 
 ####7. Configure Devise / Omniauth provider information
 
