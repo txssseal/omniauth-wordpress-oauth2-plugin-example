@@ -30,7 +30,10 @@ gem 'jbuilder', '~> 1.2'
 #authentication bits
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-wordpress-oauth2-plugin', github: 'jwickard/omniauth-wordpress-oauth2-plugin'
+gem 'omniauth-wordpress_hosted', github: 'jwickard/omniauth-wordpress-oauth2-plugin'
+gem 'oauth2'
+#gem 'omniauth-auth0', '~> 1.1'
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

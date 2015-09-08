@@ -227,9 +227,9 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :wordpress_oauth2, 'E8hYMBwpsq5hDtKNTDIAPSGHFQwfsB', 'd6Ju5v6BVz11QFuBtofbY43EMJvjZX',
-                  strategy_class: OmniAuth::Strategies::WordpressOauth2Plugin,
-                  client_options: { site: 'http://skin.exhilent.com' }
+  config.omniauth :wordpress_oauth2, 'GNWExsda9Ti7gWQuc24CDE0loZUAIO', 'qoCm39PgkYaC5qzVVLYZoCDpX2oSC7',
+                  stratgey_class: OmniAuth::Strategies::WordpressHosted,
+                  client_options: { site: 'http://www.negawattpartners.us' }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
