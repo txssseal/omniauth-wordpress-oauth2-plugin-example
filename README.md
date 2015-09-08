@@ -8,7 +8,7 @@ Example rails app demoing configuration.
 
 ####1. Create new rails app.
   
-```rails new omniauth-wordpress-oauth2-plugin-example . --database=sqlite3 -T``` 
+```rails new omniauth-wordpress-oauth2-plugin-example . --database=postgres -T``` 
 
 ####2. Add devise / omniauth gems to configuration file. `Gemfile`
 
@@ -16,7 +16,8 @@ Example rails app demoing configuration.
 #authentication bits
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-wordpress-oauth2-plugin', github: 'jwickard/omniauth-wordpress-oauth2-plugin'  
+gem 'omniauth-wordpress_hosted', github: 'txssseal/omniauth-wordpress-oauth2-plugin'
+gem 'oauth2'
 ```
 ####3. Run bundle install
 
@@ -34,16 +35,10 @@ run migrations
 
 `rails db:migrate`
 
-####6. Configure Your Wordpress Provider installation 
-
-Install Oauth2 provider plugin for your wordpress site:
-
-https://github.com/jwickard/wordpress-oauth
-
 Create client entry for your rails app with the callback key set to:
 
 ```
-http://your-rails-site.com/users/auth/wordpress_oauth2/callback
+http://your-rails-site.com/users/auth/wordpress_hosted/callback
 ```
 
 Save the generated key & secret for next step
@@ -54,7 +49,7 @@ Add provider to devise initializer `config/initializers/devise.rb`
 
 ```ruby
  config.omniauth :wordpress_oauth2, 'APP_ID', 'APP_SECRET',
-                  strategy_class: OmniAuth::Strategies::WordpressOauth2Plugin,
+                  strategy_class: OmniAuth::Strategies::WordpressHosted,
                   client_options: { site: 'http://yourcustomwordpress.com' }
 ```
 
@@ -71,9 +66,8 @@ devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 Easiest to just create the class `app/controllers/omniauth_callbacks_controller.rb` instead of running generator.
 
 ```ruby
-class OmniauthCallbacksController < ApplicationController
-  def wordpress_oauth2
-
+class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  def wordpress_hosted
     #You need to implement the method below in your model (e.g. app/models/user.rb)
     @user = User.find_for_wordpress_oauth2(request.env["omniauth.auth"], current_user)
 
@@ -94,7 +88,7 @@ Update user to be omniauthable
 
 ```ruby
 devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauthable, :omniauth_providers => [:wordpress_hosted]
 ```
 
 Update User model to find users by oauth provider data:
